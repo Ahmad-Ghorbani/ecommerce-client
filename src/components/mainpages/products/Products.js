@@ -6,7 +6,7 @@ import axios from "axios";
 import Filters from "./Filters";
 import LoadMore from "./LoadMore";
 import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../../Redux/actions";
+import { getProducts } from "../../../redux/actions";
 
 function Products() {
   const state = useContext(GlobalState);

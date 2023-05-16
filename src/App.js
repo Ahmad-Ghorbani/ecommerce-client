@@ -3,7 +3,7 @@ import { DataProvider } from "./GlobalState";
 import Header from "./components/headers/Header";
 import MainPages from "./components/mainpages/Pages";
 import { Provider } from "react-redux";
-import store from "./Redux/store";
+import store from "./redux/store";
 
 function App() {
   return (

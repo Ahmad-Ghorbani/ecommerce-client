@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GlobalState } from "../../../GlobalState";
-import { getCategories } from "../../../Redux/actions";
+import { getCategories } from "../../../redux/actions";
 
 const Filters = ({ filterProps }) => {
   const state = useContext(GlobalState);
