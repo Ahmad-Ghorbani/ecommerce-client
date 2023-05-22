@@ -13,7 +13,7 @@ function ProductsApi() {
   useEffect(() => {
     const getProducts = async () => {
       const res = await axios.get(
-        `/api/products?limit=${
+        `https://rich-swimsuit-seal.cyclic.app/api/products?limit=${
           page * 9
         }&${category}&${sort}&title[regex]=${search}`
       );

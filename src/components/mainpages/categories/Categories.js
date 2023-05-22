@@ -16,7 +16,7 @@ const Categories = () => {
     try {
       if (onEdit) {
         const res = await axios.put(
-          `/api/category/${id}`,
+          `https://rich-swimsuit-seal.cyclic.app/api/category/${id}`,
           { name: category },
           {
             headers: { Authorization: token },
@@ -26,7 +26,7 @@ const Categories = () => {
         alert(res.data.msg);
       } else {
         const res = await axios.post(
-          "/api/category",
+          "https://rich-swimsuit-seal.cyclic.app/api/category",
           { name: category },
           {
             headers: { Authorization: token },
@@ -52,7 +52,7 @@ const Categories = () => {
 
   const deleteCategory = async (id) => {
     try {
-      const res = await axios.delete(`/api/category/${id}`, {
+      const res = await axios.delete(`https://rich-swimsuit-seal.cyclic.app/api/category/${id}`, {
         headers: { Authorization: token },
       });
 

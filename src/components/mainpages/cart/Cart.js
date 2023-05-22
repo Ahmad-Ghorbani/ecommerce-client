@@ -23,7 +23,7 @@ function Cart() {
 
   const addToCart = async () => {
     await axios.patch(
-      "/user/addcart",
+      "https://rich-swimsuit-seal.cyclic.app/user/addcart",
       { cart },
       {
         headers: { Authorization: token },

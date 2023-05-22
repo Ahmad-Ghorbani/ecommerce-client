@@ -7,7 +7,7 @@ const CategoriesAPI = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const res = await axios.get("/api/category");
+      const res = await axios.get("https://rich-swimsuit-seal.cyclic.app/api/category");
       setCategories(res.data);
     };
 

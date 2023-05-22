@@ -35,13 +35,13 @@ function Products() {
     try {
       setLoading(true);
       const destroyImg = axios.post(
-        "api/destroy",
+        "https://rich-swimsuit-seal.cyclic.app/api/destroy",
         { public_id },
         {
           headers: { Authorization: token },
         }
       );
-      const deleteProduct = axios.delete(`api/products/${id}`, {
+      const deleteProduct = axios.delete(`https://rich-swimsuit-seal.cyclic.app/api/products/${id}`, {
         headers: { Authorization: token },
       });
       await destroyImg;

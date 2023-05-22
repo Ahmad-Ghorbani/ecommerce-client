@@ -3,7 +3,7 @@ import { product as actions } from "../actionTypes";
 
 const url = {
   getProducts: (page, category, sort, search) =>
-    `/api/products?limit=${
+    `https://rich-swimsuit-seal.cyclic.app/api/products?limit=${
       page * 9
     }&${category}&${sort}&title[regex]=${search}`,
 };

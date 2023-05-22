@@ -13,7 +13,7 @@ function Login() {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/user/login", { ...user });
+      await axios.post("https://rich-swimsuit-seal.cyclic.app/user/login", { ...user });
 
       localStorage.setItem("firstLogin", true);
 

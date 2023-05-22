@@ -67,7 +67,7 @@ const CreateProduct = () => {
       formData.append("file", file);
 
       setLoading(true);
-      const res = await axios.post("/api/upload", formData, {
+      const res = await axios.post("https://rich-swimsuit-seal.cyclic.app/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: token,
@@ -87,7 +87,7 @@ const CreateProduct = () => {
       setLoading(true);
 
       await axios.post(
-        "/api/destroy",
+        "https://rich-swimsuit-seal.cyclic.app/api/destroy",
         { public_id: images.public_id },
         { headers: { Authorization: token } }
       );
@@ -112,7 +112,7 @@ const CreateProduct = () => {
 
       if (onEdit) {
         await axios.put(
-          `/api/products/${product._id}`,
+          `https://rich-swimsuit-seal.cyclic.app/api/products/${product._id}`,
           { ...product, images },
           {
             headers: {
@@ -122,7 +122,7 @@ const CreateProduct = () => {
         );
       } else {
         await axios.post(
-          "/api/products",
+          "https://rich-swimsuit-seal.cyclic.app/api/products",
           { ...product, images },
           {
             headers: {

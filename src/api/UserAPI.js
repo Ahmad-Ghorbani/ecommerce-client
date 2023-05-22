@@ -10,7 +10,7 @@ const UserAPI = (token) => {
     if (token) {
       const getUser = async () => {
         try {
-          const res = await axios.get("/user/infor", {
+          const res = await axios.get("https://rich-swimsuit-seal.cyclic.app/user/infor", {
             headers: { Authorization: token },
           });
 
@@ -35,7 +35,7 @@ const UserAPI = (token) => {
       setCart([...cart, { ...product, quantity: 1 }]);
 
       await axios.patch(
-        "/user/addcart",
+        "https://rich-swimsuit-seal.cyclic.app/user/addcart",
         { cart: [...cart, { ...product, quantity: 1 }] },
         {
           headers: { Authorization: token },

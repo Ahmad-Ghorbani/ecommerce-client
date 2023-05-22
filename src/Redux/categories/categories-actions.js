@@ -1,7 +1,7 @@
 import axios from "axios";
 import { category as actions } from "../actionTypes";
 const url = {
-  getCategories: () => "/api/category",
+  getCategories: () => "https://rich-swimsuit-seal.cyclic.app/api/category",
 };
 
 const setLoading = (loading) => ({
