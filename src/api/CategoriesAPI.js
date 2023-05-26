@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { BASE_APP_URL } from "../constants";
 
 const CategoriesAPI = () => {
   const [categories, setCategories] = useState([]);
@@ -7,7 +8,7 @@ const CategoriesAPI = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      const res = await axios.get("https://rich-swimsuit-seal.cyclic.app/api/category");
+      const res = await axios.get(`${BASE_APP_URL}/api/category`);
       setCategories(res.data);
     };
 

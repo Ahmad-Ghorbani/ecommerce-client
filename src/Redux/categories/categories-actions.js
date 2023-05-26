@@ -1,7 +1,8 @@
 import axios from "axios";
 import { category as actions } from "../actionTypes";
+import { BASE_APP_URL } from "../../constants";
 const url = {
-  getCategories: () => "https://rich-swimsuit-seal.cyclic.app/api/category",
+  getCategories: () => `${BASE_APP_URL}/api/category`,
 };
 
 const setLoading = (loading) => ({

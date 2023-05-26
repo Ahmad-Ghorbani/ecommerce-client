@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import axios from "axios";
 import PayPal from "./PayPal";
+import { BASE_APP_URL } from "../../../constants";
 
 function Cart() {
   const state = useContext(GlobalState);
@@ -23,7 +24,7 @@ function Cart() {
 
   const addToCart = async () => {
     await axios.patch(
-      "https://rich-swimsuit-seal.cyclic.app/user/addcart",
+      `${BASE_APP_URL}/user/addcart`,
       { cart },
       {
         headers: { Authorization: token },

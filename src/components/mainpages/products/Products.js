@@ -7,6 +7,7 @@ import Filters from "./Filters";
 import LoadMore from "./LoadMore";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../../../redux/actions";
+import { BASE_APP_URL } from "../../../constants";
 
 function Products() {
   const state = useContext(GlobalState);
@@ -35,13 +36,13 @@ function Products() {
     try {
       setLoading(true);
       const destroyImg = axios.post(
-        "https://rich-swimsuit-seal.cyclic.app/api/destroy",
+        `${BASE_APP_URL}/api/destroy`,
         { public_id },
         {
           headers: { Authorization: token },
         }
       );
-      const deleteProduct = axios.delete(`https://rich-swimsuit-seal.cyclic.app/api/products/${id}`, {
+      const deleteProduct = axios.delete(`${BASE_APP_URL}/api/products/${id}`, {
         headers: { Authorization: token },
       });
       await destroyImg;

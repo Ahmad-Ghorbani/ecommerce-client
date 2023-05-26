@@ -1,9 +1,10 @@
 import axios from "axios";
 import { product as actions } from "../actionTypes";
+import { BASE_APP_URL } from "../../constants";
 
 const url = {
   getProducts: (page, category, sort, search) =>
-    `https://rich-swimsuit-seal.cyclic.app/api/products?limit=${
+    `${BASE_APP_URL}/api/products?limit=${
       page * 9
     }&${category}&${sort}&title[regex]=${search}`,
 };

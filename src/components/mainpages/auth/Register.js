@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_APP_URL } from "../../../constants";
 
 function Register() {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -13,7 +14,7 @@ function Register() {
   const registerSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://rich-swimsuit-seal.cyclic.app/user/register", { ...user });
+      await axios.post(`${BASE_APP_URL}/user/register`, { ...user });
 
       localStorage.setItem("firstLogin", true);
 

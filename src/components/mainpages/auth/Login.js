@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_APP_URL } from "../../../constants";
 
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -13,7 +14,12 @@ function Login() {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://rich-swimsuit-seal.cyclic.app/user/login", { ...user });
+
+     const res =  await axios.post(`${BASE_APP_URL}/user/login`, { ...user }, {
+          withCredentials: true,
+        } );
+
+     console.log(res,'res');
 
       localStorage.setItem("firstLogin", true);
 

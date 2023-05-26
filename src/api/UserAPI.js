@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_APP_URL } from "../constants";
 
 const UserAPI = (token) => {
   const [isLogged, setIsLogged] = useState(false);
@@ -7,10 +8,12 @@ const UserAPI = (token) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
+    console.log('mmmm');
     if (token) {
+      console.log('nnnn');
       const getUser = async () => {
         try {
-          const res = await axios.get("https://rich-swimsuit-seal.cyclic.app/user/infor", {
+          const res = await axios.get(`${BASE_APP_URL}/user/infor`, {
             headers: { Authorization: token },
           });
 
@@ -35,7 +38,7 @@ const UserAPI = (token) => {
       setCart([...cart, { ...product, quantity: 1 }]);
 
       await axios.patch(
-        "https://rich-swimsuit-seal.cyclic.app/user/addcart",
+        `${BASE_APP_URL}/user/addcart`,
         { cart: [...cart, { ...product, quantity: 1 }] },
         {
           headers: { Authorization: token },

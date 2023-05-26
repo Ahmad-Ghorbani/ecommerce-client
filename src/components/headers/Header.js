@@ -5,6 +5,7 @@ import close from "./icon/close.svg";
 import cartIcon from "./icon/cart.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_APP_URL } from "../../constants";
 
 function Header() {
   const state = useContext(GlobalState);
@@ -14,7 +15,7 @@ function Header() {
   const [menu, setMenu] = useState(false);
 
   const logoutUser = async () => {
-    await axios.get("https://rich-swimsuit-seal.cyclic.app/user/logout");
+    await axios.get(`${BASE_APP_URL}/user/logout`);
 
     localStorage.removeItem("firstLogin");
 

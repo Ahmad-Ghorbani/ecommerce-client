@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
 import axios from "axios";
+import { BASE_APP_URL } from "../../../constants";
 
 const Categories = () => {
   const state = useContext(GlobalState);
@@ -16,7 +17,7 @@ const Categories = () => {
     try {
       if (onEdit) {
         const res = await axios.put(
-          `https://rich-swimsuit-seal.cyclic.app/api/category/${id}`,
+          `${BASE_APP_URL}/api/category/${id}`,
           { name: category },
           {
             headers: { Authorization: token },
@@ -26,7 +27,7 @@ const Categories = () => {
         alert(res.data.msg);
       } else {
         const res = await axios.post(
-          "https://rich-swimsuit-seal.cyclic.app/api/category",
+          `${BASE_APP_URL}/api/category`,
           { name: category },
           {
             headers: { Authorization: token },
@@ -52,7 +53,7 @@ const Categories = () => {
 
   const deleteCategory = async (id) => {
     try {
-      const res = await axios.delete(`https://rich-swimsuit-seal.cyclic.app/api/category/${id}`, {
+      const res = await axios.delete(`${BASE_APP_URL}/api/category/${id}`, {
         headers: { Authorization: token },
       });
 

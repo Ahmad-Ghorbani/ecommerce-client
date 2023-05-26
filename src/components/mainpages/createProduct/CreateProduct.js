@@ -3,6 +3,7 @@ import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import Loading from "../../utils/loading/Loading";
 import { useNavigate, useParams } from "react-router-dom";
+import { BASE_APP_URL } from "../../../constants";
 
 const initialState = {
   product_id: "",
@@ -67,7 +68,7 @@ const CreateProduct = () => {
       formData.append("file", file);
 
       setLoading(true);
-      const res = await axios.post("https://rich-swimsuit-seal.cyclic.app/api/upload", formData, {
+      const res = await axios.post(`${BASE_APP_URL}/api/upload`, formData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: token,
@@ -87,7 +88,7 @@ const CreateProduct = () => {
       setLoading(true);
 
       await axios.post(
-        "https://rich-swimsuit-seal.cyclic.app/api/destroy",
+        `${BASE_APP_URL}/api/destroy`,
         { public_id: images.public_id },
         { headers: { Authorization: token } }
       );
@@ -112,7 +113,7 @@ const CreateProduct = () => {
 
       if (onEdit) {
         await axios.put(
-          `https://rich-swimsuit-seal.cyclic.app/api/products/${product._id}`,
+          `${BASE_APP_URL}/api/products/${product._id}`,
           { ...product, images },
           {
             headers: {
@@ -122,7 +123,7 @@ const CreateProduct = () => {
         );
       } else {
         await axios.post(
-          "https://rich-swimsuit-seal.cyclic.app/api/products",
+          `${BASE_APP_URL}/api/products`,
           { ...product, images },
           {
             headers: {

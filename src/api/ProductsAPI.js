@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_APP_URL } from "../constants";
 
 function ProductsApi() {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ function ProductsApi() {
   useEffect(() => {
     const getProducts = async () => {
       const res = await axios.get(
-        `https://rich-swimsuit-seal.cyclic.app/api/products?limit=${
+        `${BASE_APP_URL}/api/products?limit=${
           page * 9
         }&${category}&${sort}&title[regex]=${search}`
       );
