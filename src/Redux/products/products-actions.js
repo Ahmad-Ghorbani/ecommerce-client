@@ -37,6 +37,6 @@ export const getProducts =
       dispatch(setResult(result?.data?.results));
       dispatch(setLoading(false));
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };

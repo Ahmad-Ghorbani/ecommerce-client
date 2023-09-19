@@ -8,9 +8,7 @@ const UserAPI = (token) => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    console.log('mmmm');
     if (token) {
-      console.log('nnnn');
       const getUser = async () => {
         try {
           const res = await axios.get(`${BASE_APP_URL}/user/infor`, {

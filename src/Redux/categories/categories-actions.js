@@ -22,6 +22,6 @@ export const getCategories = () => async (dispatch) => {
     dispatch(setCategories(result.data));
     dispatch(setLoading(false));
   } catch (error) {
-    console.log(error.message);
+    alert(error.message);
   }
 };

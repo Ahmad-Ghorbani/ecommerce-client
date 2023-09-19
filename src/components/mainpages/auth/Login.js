@@ -14,12 +14,13 @@ function Login() {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-
-     const res =  await axios.post(`${BASE_APP_URL}/user/login`, { ...user }, {
+      const res = await axios.post(
+        `${BASE_APP_URL}/user/login`,
+        { ...user },
+        {
           withCredentials: true,
-        } );
-
-     console.log(res,'res');
+        }
+      );
 
       localStorage.setItem("firstLogin", true);
 
