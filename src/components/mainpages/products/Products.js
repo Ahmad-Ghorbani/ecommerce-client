@@ -1,48 +1,31 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalState } from "../../../GlobalState";
 import ProductItem from "../../utils/productitem/ProductItem";
 import Loading from "../../utils/loading/Loading";
 import axios from "axios";
 import Filters from "./Filters";
 import LoadMore from "./LoadMore";
-import { useSelector, useDispatch } from "react-redux";
-import { getProducts } from "../../../redux/actions";
-import { BASE_APP_URL } from "../../../constants";
 
 function Products() {
   const state = useContext(GlobalState);
-
+  const [products, setProducts] = state.productsAPI.products;
   const [isAdmin] = state.userAPI.isAdmin;
   const [token] = state.token;
   const [callback, setCallback] = state.productsAPI.callback;
   const [loading, setLoading] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
-  const [page, setPage] = useState(1);
-  const [productsFilters, setProductsFilters] = useState({
-    category: "",
-    search: "",
-    sort: "",
-  });
-
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.productData.products);
-
-  useEffect(() => {
-    const { category, sort, search } = productsFilters;
-    dispatch(getProducts(page, category, sort, search));
-  }, [productsFilters, page]); //eslint-disable-line
 
   const deleteProduct = async (id, public_id) => {
     try {
       setLoading(true);
       const destroyImg = axios.post(
-        `${BASE_APP_URL}/api/destroy`,
+        "api/destroy",
         { public_id },
         {
           headers: { Authorization: token },
         }
       );
-      const deleteProduct = axios.delete(`${BASE_APP_URL}/api/products/${id}`, {
+      const deleteProduct = axios.delete(`api/products/${id}`, {
         headers: { Authorization: token },
       });
       await destroyImg;
@@ -58,14 +41,14 @@ function Products() {
     products.forEach((product) => {
       if (product._id === id) product.checked = !product.checked;
     });
-    // setCheckedProducts([...products]);
+    setProducts([...products]);
   };
 
   const checkAll = () => {
     products.forEach((product) => {
       product.checked = !isCheck;
     });
-    // setCheckedProducts([...products]);
+    setProducts([...products]);
     setIsCheck(!isCheck);
   };
 
@@ -84,11 +67,7 @@ function Products() {
 
   return (
     <>
-      <Filters
-        filterProps={(value) => {
-          setProductsFilters(value);
-        }}
-      />
+      <Filters />
       {isAdmin && (
         <div className="delete-all">
           <span>Select all</span>
@@ -97,21 +76,20 @@ function Products() {
         </div>
       )}
       <div className="products">
-        {products &&
-          products.map((product) => {
-            return (
-              <ProductItem
-                product={product}
-                key={product._id}
-                isAdmin={isAdmin}
-                deleteProduct={deleteProduct}
-                handleCheck={handleCheck}
-              />
-            );
-          })}
+        {products.map((product) => {
+          return (
+            <ProductItem
+              product={product}
+              key={product._id}
+              isAdmin={isAdmin}
+              deleteProduct={deleteProduct}
+              handleCheck={handleCheck}
+            />
+          );
+        })}
       </div>
-      <LoadMore PageNumber={(value) => setPage(value)} />
-      {products?.length === 0 && <Loading />}
+      <LoadMore />
+      {products.length === 0 && <Loading />}
     </>
   );
 }

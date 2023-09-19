@@ -1,28 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
-import { getCategories } from "../../../redux/actions";
 
-const Filters = ({ filterProps }) => {
+const Filters = () => {
   const state = useContext(GlobalState);
-
-  const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categoryData.categories);
-
+  const [categories] = state.categoriesAPI.categories;
   const [category, setCategory] = state.productsAPI.category;
   const [sort, setSort] = state.productsAPI.sort;
   const [search, setSearch] = state.productsAPI.search;
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []); //eslint-disable-line
-
-  useEffect(() => {
-    filterProps({ category, sort, search });
-  }, [category, sort, search]); //eslint-disable-line
-
-  const handleCategory = ({ target: { value } }) => {
-    setCategory(value);
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
     setSearch("");
   };
 
@@ -44,7 +31,7 @@ const Filters = ({ filterProps }) => {
         type="text"
         value={search}
         placeholder="Enter your search!"
-        onChange={({ target: { value } }) => setSearch(value.toLowerCase())}
+        onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
 
       <div className="row sort">
