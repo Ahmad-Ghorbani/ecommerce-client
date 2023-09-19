@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
 
-const LoadMore = ({ PageNumber }) => {
+const LoadMore = () => {
   const state = useContext(GlobalState);
   const [page, setPage] = state.productsAPI.page;
   const [result] = state.productsAPI.result;
@@ -13,7 +13,6 @@ const LoadMore = ({ PageNumber }) => {
       ) : (
         <button
           onClick={() => {
-            PageNumber(page + 1);
             setPage(page + 1);
           }}
         >
