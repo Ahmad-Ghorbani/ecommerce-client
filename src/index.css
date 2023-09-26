@@ -1,3 +1,17 @@
+@import url("./components/headers/Header.css");
+
+@import url("./components/mainpages/products/products.css");
+
+@import url("./components/mainpages/detailProduct/DetailProduct.css");
+
+@import url("./components/mainpages/auth/Login.css");
+
+@import url("./components/mainpages/cart/Cart.css");
+
+@import url("./components/mainpages/categories/Categories.css");
+
+@import url("./components/mainpages/createProduct/CreateProduct.css");
+
 * {
   padding: 0;
   box-sizing: border-box;
@@ -36,27 +50,6 @@ button {
   background: transparent;
   cursor: pointer;
 }
-
-/* --------------- Header --------------- */
-@import url("./components/headers/Header.css");
-
-/* --------------- Products --------------- */
-@import url("./components/mainpages/products/products.css");
-
-/* --------------- Detail Product --------------- */
-@import url("./components/mainpages/detailProduct/DetailProduct.css");
-
-/* --------------- Login --------------- */
-@import url("./components/mainpages/auth/Login.css");
-
-/* --------------- Cart --------------- */
-@import url("./components/mainpages/cart/Cart.css");
-
-/* --------------- Categories --------------- */
-@import url("./components/mainpages/categories/Categories.css");
-
-/* --------------- Create Product --------------- */
-@import url("./components/mainpages/createProduct/CreateProduct.css");
 
 /* --------------- Responsive --------------- */
 @media (max-width: 820px) {
