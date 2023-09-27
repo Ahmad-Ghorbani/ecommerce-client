@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { BASE_APP_URL } from "../constants";
+import { getCategories } from "../axios/api";
 
 function ProductsApi() {
   const [products, setProducts] = useState([]);
@@ -12,16 +11,14 @@ function ProductsApi() {
   const [result, setResult] = useState(0);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const res = await axios.get(
-        `${BASE_APP_URL}/api/products?limit=${
-          page * 9
-        }&${category}&${sort}&title[regex]=${search}`
-      );
-      setProducts(res.data.products);
-      setResult(res.data.results);
+    const handleGetProducts = async () => {
+      const data = await getProducts(page, category, sort, search);
+
+      setProducts(data.products);
+      setResult(data.results);
     };
-    getProducts();
+
+    handleGetProducts();
   }, [callback, category, sort, search, page]);
 
   return {

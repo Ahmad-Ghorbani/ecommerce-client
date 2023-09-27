@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalState } from "../../GlobalState";
 import Menu from "./icon/menu.svg";
 import close from "./icon/close.svg";
@@ -6,6 +6,7 @@ import cartIcon from "./icon/cart.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { BASE_APP_URL } from "../../constants";
+import { getCategoriesME } from "../../axios/api";
 
 function Header() {
   const state = useContext(GlobalState);

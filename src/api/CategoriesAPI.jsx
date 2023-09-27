@@ -1,18 +1,17 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { BASE_APP_URL } from "../constants";
+import { getCategories } from "../axios/api";
 
 const CategoriesAPI = () => {
   const [categories, setCategories] = useState([]);
   const [callback, setCallback] = useState(false);
 
   useEffect(() => {
-    const getCategories = async () => {
-      const res = await axios.get(`${BASE_APP_URL}/api/category`);
-      setCategories(res.data);
+    const handleGetCategories = async () => {
+      const data = await getCategories();
+      setCategories(data);
     };
 
-    getCategories();
+    handleGetCategories();
   }, [callback]);
 
   return {

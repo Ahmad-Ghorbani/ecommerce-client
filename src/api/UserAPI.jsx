@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { BASE_APP_URL } from "../constants";
+import { getUser } from "../axios/api";
 
 const UserAPI = (token) => {
   const [isLogged, setIsLogged] = useState(false);
@@ -9,21 +8,16 @@ const UserAPI = (token) => {
 
   useEffect(() => {
     if (token) {
-      const getUser = async () => {
-        try {
-          const res = await axios.get(`${BASE_APP_URL}/user/infor`, {
-            headers: { Authorization: token },
-          });
+      const handleGetUser = async () => {
+        const data = await getUser();
 
-          setIsLogged(true);
-          setIsAdmin(res.data.role === 1 ? true : false);
+        setIsLogged(true);
+        setIsAdmin(data.role === 1 ? true : false);
 
-          setCart(res.data.cart);
-        } catch (err) {
-          alert(err.response.data.msg);
-        }
+        setCart(data.cart);
       };
-      getUser();
+
+      handleGetUser();
     }
   }, [token]);
 
@@ -35,13 +29,7 @@ const UserAPI = (token) => {
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
 
-      await axios.patch(
-        `${BASE_APP_URL}/user/addcart`,
-        { cart: [...cart, { ...product, quantity: 1 }] },
-        {
-          headers: { Authorization: token },
-        }
-      );
+      await handleAddTOCart(cart, product);
     } else alert("This product has been added to cart");
   };
 
