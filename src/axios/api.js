@@ -23,7 +23,7 @@ export const getUser = async (token) => {
   }
 };
 
-export const addCart = async (cart, product) => {
+export const addToCart = async (cart, product) => {
   await axios.patch(
     `${BASE_APP_URL}/user/addcart`,
     { cart: [...cart, { ...product, quantity: 1 }] },

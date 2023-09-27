@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUser } from "../axios/api";
+import { getUser, addToCart } from "../axios/api";
 
 const UserAPI = (token) => {
   const [isLogged, setIsLogged] = useState(false);
@@ -29,7 +29,7 @@ const UserAPI = (token) => {
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
 
-      await handleAddTOCart(cart, product);
+      await addToCart(cart, product);
     } else alert("This product has been added to cart");
   };
 
