@@ -9,7 +9,7 @@ const UserAPI = (token) => {
   useEffect(() => {
     if (token) {
       const handleGetUser = async () => {
-        const data = await getUser();
+        const data = await getUser(token);
 
         setIsLogged(true);
         setIsAdmin(data.role === 1 ? true : false);
