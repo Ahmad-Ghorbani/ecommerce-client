@@ -7,13 +7,13 @@ export const getCategories = async () => {
 };
 
 export const getProducts = async (page, category, sort, search) => {
-  const { data } = awaitApi.get(PRODUCTS(page, category, sort, search));
+  const { data } = await Api.get(PRODUCTS(page, category, sort, search));
   return data;
 };
 
 export const getUser = async (token) => {
   try {
-    const { data } = await axios.get(USER, {
+    const { data } = await Api.get(USER, {
       headers: { Authorization: token },
     });
 
@@ -24,7 +24,7 @@ export const getUser = async (token) => {
 };
 
 export const addToCart = async (cart, product) => {
-  await axios.patch(
+  await Api.patch(
     `${BASE_APP_URL}/user/addcart`,
     { cart: [...cart, { ...product, quantity: 1 }] },
     {
