@@ -4,6 +4,7 @@ import UserAPI from "./api/UserAPI";
 import CategoriesAPI from "./api/CategoriesAPI";
 import axios from "axios";
 import { BASE_APP_URL } from "./constants";
+import { refreshToken } from "./axios/api";
 
 export const GlobalState = createContext();
 
@@ -13,19 +14,17 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
-      const refreshToken = async () => {
-        const res = await axios.get(`${BASE_APP_URL}/user/refresh_token`, {
-          withCredentials: true,
-        });
+      const handleRefreshToken = async () => {
+        const data = await refreshToken();
 
-        setToken(res.data.accessToken);
+        setToken(data.accessToken);
 
         setTimeout(() => {
-          refreshToken();
+          handleRefreshToken();
         }, 10 * 60 * 1000);
       };
 
-      refreshToken();
+      handleRefreshToken();
     }
   }, []);
 

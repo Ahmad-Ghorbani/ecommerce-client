@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { GlobalState } from "../../../GlobalState";
 import ProductItem from "../../utils/productitem/ProductItem";
 import Loading from "../../utils/loading/Loading";
-import axios from "axios";
 import Filters from "./Filters";
 import LoadMore from "./LoadMore";
+import { deleteProduct, destroyImg } from "../../../axios/api";
 
 function Products() {
   const state = useContext(GlobalState);
@@ -15,21 +15,13 @@ function Products() {
   const [loading, setLoading] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
 
-  const deleteProduct = async (id, public_id) => {
+  const handleDeleteProduct = async (id, public_id) => {
     try {
       setLoading(true);
-      const destroyImg = axios.post(
-        "api/destroy",
-        { public_id },
-        {
-          headers: { Authorization: token },
-        }
-      );
-      const deleteProduct = axios.delete(`api/products/${id}`, {
-        headers: { Authorization: token },
-      });
-      await destroyImg;
-      await deleteProduct;
+
+      await destroyImg(public_id, token);
+      await deleteProduct(id, token);
+
       setCallback(!callback);
       setLoading(false);
     } catch (err) {
@@ -54,7 +46,8 @@ function Products() {
 
   const deleteAll = () => {
     products.forEach((product) => {
-      if (product.checked) deleteProduct(product._id, product.images.public_id);
+      if (product.checked)
+        handleDeleteProduct(product._id, product.images.public_id);
     });
   };
 
@@ -82,7 +75,7 @@ function Products() {
               product={product}
               key={product._id}
               isAdmin={isAdmin}
-              deleteProduct={deleteProduct}
+              deleteProduct={handleDeleteProduct}
               handleCheck={handleCheck}
             />
           );

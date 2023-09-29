@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { GlobalState } from "../../../GlobalState";
-import axios from "axios";
-import { BASE_APP_URL } from "../../../constants";
+import { createCategory, deleteCategory } from "../../../axios/api";
 
 const Categories = () => {
   const state = useContext(GlobalState);
@@ -12,30 +11,10 @@ const Categories = () => {
   const [onEdit, setOnEdit] = useState(false);
   const [id, setId] = useState("");
 
-  const createCategory = async (e) => {
+  const handleCreateCategory = async (e) => {
     e.preventDefault();
     try {
-      if (onEdit) {
-        const res = await axios.put(
-          `${BASE_APP_URL}/api/category/${id}`,
-          { name: category },
-          {
-            headers: { Authorization: token },
-          }
-        );
-
-        alert(res.data.msg);
-      } else {
-        const res = await axios.post(
-          `${BASE_APP_URL}/api/category`,
-          { name: category },
-          {
-            headers: { Authorization: token },
-          }
-        );
-
-        alert(res.data.msg);
-      }
+      await createCategory(onEdit, category, token, id);
 
       setOnEdit(false);
       setCategory("");
@@ -51,13 +30,11 @@ const Categories = () => {
     setOnEdit(true);
   };
 
-  const deleteCategory = async (id) => {
+  const handleDeleteCategory = async (id) => {
     try {
-      const res = await axios.delete(`${BASE_APP_URL}/api/category/${id}`, {
-        headers: { Authorization: token },
-      });
+      const data = await deleteCategory(id, token);
 
-      alert(res.data.msg);
+      alert(data.msg);
       setCallback(!callback);
     } catch (err) {
       alert(err.response.data.msg);
@@ -66,7 +43,7 @@ const Categories = () => {
 
   return (
     <div className="categories">
-      <form onSubmit={createCategory}>
+      <form onSubmit={handleCreateCategory}>
         <label htmlFor="category">Category</label>
         <input
           type="text"
@@ -85,7 +62,7 @@ const Categories = () => {
               <button onClick={() => editCategory(category._id, category.name)}>
                 Edit
               </button>
-              <button onClick={() => deleteCategory(category._id)}>
+              <button onClick={() => handleDeleteCategory(category._id, token)}>
                 Delete
               </button>
             </div>

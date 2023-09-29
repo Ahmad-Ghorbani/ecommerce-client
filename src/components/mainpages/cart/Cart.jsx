@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
-import axios from "axios";
 import PayPal from "./PayPal";
-import { BASE_APP_URL } from "../../../constants";
+import { addToCart } from "../../../axios/api";
 
 function Cart() {
   const state = useContext(GlobalState);
@@ -21,16 +20,6 @@ function Cart() {
 
     getTotal();
   }, [cart]);
-
-  const addToCart = async () => {
-    await axios.patch(
-      `${BASE_APP_URL}/user/addcart`,
-      { cart },
-      {
-        headers: { Authorization: token },
-      }
-    );
-  };
 
   const increment = (id) => {
     cart.forEach((item) => {

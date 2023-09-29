@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUser, addToCart } from "../axios/api";
+import { getUser, addCart } from "../axios/api";
 
 const UserAPI = (token) => {
   const [isLogged, setIsLogged] = useState(false);
@@ -21,7 +21,7 @@ const UserAPI = (token) => {
     }
   }, [token]);
 
-  const addCart = async (product) => {
+  const handleAddCart = async (product) => {
     if (!isLogged) return alert("Please login to continue buying");
     const check = cart.every((item) => {
       return item._id !== product._id;
@@ -29,7 +29,7 @@ const UserAPI = (token) => {
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
 
-      await addToCart(cart, product);
+      await addCart(cart, product);
     } else alert("This product has been added to cart");
   };
 
@@ -37,7 +37,7 @@ const UserAPI = (token) => {
     isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
     cart: [cart, setCart],
-    addCart: addCart,
+    addCart: handleAddCart,
   };
 };
 

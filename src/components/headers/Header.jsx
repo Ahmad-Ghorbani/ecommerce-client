@@ -4,9 +4,7 @@ import Menu from "./icon/menu.svg";
 import close from "./icon/close.svg";
 import cartIcon from "./icon/cart.svg";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { BASE_APP_URL } from "../../constants";
-import { getCategoriesME } from "../../axios/api";
+import { logoutUser } from "../../axios/api";
 
 function Header() {
   const state = useContext(GlobalState);
@@ -15,8 +13,8 @@ function Header() {
   const [cart] = state.userAPI.cart;
   const [menu, setMenu] = useState(false);
 
-  const logoutUser = async () => {
-    await axios.get(`${BASE_APP_URL}/user/logout`);
+  const handleLogoutUser = async () => {
+    await logoutUser();
 
     localStorage.removeItem("firstLogin");
 
@@ -39,11 +37,8 @@ function Header() {
   const loggedRouter = () => {
     return (
       <>
-        {/* <li>
-          <Link to="/history">History</Link>
-        </li> */}
         <li>
-          <Link to="/" onClick={logoutUser}>
+          <Link to="/" onClick={handleLogoutUser}>
             Logout
           </Link>
         </li>

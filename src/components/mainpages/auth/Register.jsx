@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { BASE_APP_URL } from "../../../constants";
+import { registerSubmit } from "../../../axios/api";
 
 function Register() {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -11,10 +10,10 @@ function Register() {
     setUser({ ...user, [name]: value });
   };
 
-  const registerSubmit = async (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${BASE_APP_URL}/user/register`, { ...user });
+      await registerSubmit();
 
       localStorage.setItem("firstLogin", true);
 
@@ -26,7 +25,7 @@ function Register() {
 
   return (
     <div className="login-page">
-      <form onSubmit={registerSubmit}>
+      <form onSubmit={handleRegisterSubmit}>
         <h2>Register</h2>
         <input
           type="text"

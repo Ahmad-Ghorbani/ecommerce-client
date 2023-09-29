@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import { GlobalState } from "../../../GlobalState";
 import Loading from "../../utils/loading/Loading";
 import { useNavigate, useParams } from "react-router-dom";
-import { BASE_APP_URL } from "../../../constants";
+import { destroy, submitProduct, uploadImage } from "../../../axios/api";
 
 const initialState = {
   product_id: "",
@@ -68,15 +67,11 @@ const CreateProduct = () => {
       formData.append("file", file);
 
       setLoading(true);
-      const res = await axios.post(`${BASE_APP_URL}/api/upload`, formData, {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: token,
-        },
-      });
+
+      const data = uploadImage(formData, token);
 
       setLoading(false);
-      setImages(res.data);
+      setImages(data);
     } catch (err) {
       alert(err.response.data.msg);
     }
@@ -87,11 +82,7 @@ const CreateProduct = () => {
       if (!isAdmin) return alert("You are not an admin");
       setLoading(true);
 
-      await axios.post(
-        `${BASE_APP_URL}/api/destroy`,
-        { public_id: images.public_id },
-        { headers: { Authorization: token } }
-      );
+      await destroy(images, token);
 
       setLoading(false);
       setImages(false);
@@ -111,27 +102,7 @@ const CreateProduct = () => {
       if (!isAdmin) return alert("You are not an admin");
       if (!images) return alert("No image uploaded");
 
-      if (onEdit) {
-        await axios.put(
-          `${BASE_APP_URL}/api/products/${product._id}`,
-          { ...product, images },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-      } else {
-        await axios.post(
-          `${BASE_APP_URL}/api/products`,
-          { ...product, images },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-      }
+      await submitProduct();
 
       setCallback(!callback);
       navigate("/");
