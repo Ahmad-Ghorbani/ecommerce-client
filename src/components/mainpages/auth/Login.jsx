@@ -13,7 +13,7 @@ function Login() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginSubmit();
+      await loginSubmit(user);
 
       localStorage.setItem("firstLogin", true);
 

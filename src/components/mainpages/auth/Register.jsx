@@ -13,7 +13,7 @@ function Register() {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await registerSubmit();
+      await registerSubmit(user);
 
       localStorage.setItem("firstLogin", true);
 
