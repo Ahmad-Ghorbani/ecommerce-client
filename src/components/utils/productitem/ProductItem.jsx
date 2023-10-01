@@ -2,6 +2,7 @@ import React from "react";
 import BtnRender from "./BtnRender";
 
 function ProductItem({ product, isAdmin, deleteProduct, handleCheck }) {
+  console.log(product, 'product');
   return (
     <div className="product_card">
       {isAdmin && (
