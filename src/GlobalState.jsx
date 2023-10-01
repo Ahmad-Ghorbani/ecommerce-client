@@ -2,8 +2,6 @@ import React, { createContext, useState, useEffect } from "react";
 import ProductsAPI from "./api/ProductsAPI";
 import UserAPI from "./api/UserAPI";
 import CategoriesAPI from "./api/CategoriesAPI";
-import axios from "axios";
-import { BASE_APP_URL } from "./constants";
 import { refreshToken } from "./axios/api";
 
 export const GlobalState = createContext();

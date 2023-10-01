@@ -9,6 +9,8 @@ function Cart() {
   const [cart, setCart] = state.userAPI.cart;
   const [total, setTotal] = useState(0);
 
+  console.log(cart);
+
   useEffect(() => {
     const getTotal = () => {
       const total = cart.reduce((previous, item) => {
@@ -29,7 +31,7 @@ function Cart() {
     });
 
     setCart([...cart]);
-    addToCart();
+    addToCart(cart, token);
   };
 
   const decrement = (id) => {
@@ -40,7 +42,7 @@ function Cart() {
     });
 
     setCart([...cart]);
-    addToCart();
+    addToCart(cart, token);
   };
 
   const removeProduct = (id) => {
@@ -52,7 +54,7 @@ function Cart() {
       });
 
     setCart([...cart]);
-    addToCart();
+    addToCart(cart, token);
   };
 
   if (cart.length === 0)
