@@ -29,7 +29,7 @@ const UserAPI = (token) => {
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
 
-      await addCart(cart, product, token);
+      await addCart(cart, token);
     } else alert("This product has been added to cart");
   };
 

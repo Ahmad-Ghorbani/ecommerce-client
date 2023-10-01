@@ -40,10 +40,10 @@ export const getUser = async (token) => {
   }
 };
 
-export const addCart = async (cart, product, token) => {
+export const addCart = async (cart, token) => {
   await Api.patch(
     ADD_CART,
-    { cart: [...cart, { ...product, quantity: 1 }] },
+    { cart: [...cart] },
     {
       headers: { Authorization: token },
     }
