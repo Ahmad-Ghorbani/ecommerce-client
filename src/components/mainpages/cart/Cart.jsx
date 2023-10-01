@@ -9,8 +9,6 @@ function Cart() {
   const [cart, setCart] = state.userAPI.cart;
   const [total, setTotal] = useState(0);
 
-  console.log(cart);
-
   useEffect(() => {
     const getTotal = () => {
       const total = cart.reduce((previous, item) => {
