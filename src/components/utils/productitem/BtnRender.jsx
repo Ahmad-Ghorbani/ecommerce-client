@@ -27,7 +27,7 @@ function BtnRender({ product, deleteProduct }) {
         </>
       ) : (
         <>
-          <Link id="btn_buy" to="#!" onClick={() => addCart(cart, product, token)}>
+          <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>
             Buy
           </Link>
           <Link id="btn_view" to={`/detail/${product._id}`}>
